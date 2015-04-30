@@ -13,8 +13,11 @@ public class War extends Deck
     */
    private Queue<Card> compPile;
    private Queue<Card> playerPile;
+   private Card playerCard;
+   private Card compCard;
    private int compCards;
    private int playerCards;
+   private Card[] warCards = new Card[4];
    
    /**
     * War Constructor
@@ -37,19 +40,64 @@ public class War extends Deck
     * @param pile The pile of cards, either computer or user
     * @return card The card at top of pile
     */
-   public Card flip()
+   public void flip()
    {
-      Card card = new Card(3,Card.SPADES);
-      return card;
+      if(compCard.equals(playerCard))
+         war();
+      else
+      {
+         compCard = compPile.remove();
+         playerCard = playerPile.remove();
+      }
    }
    
    /**
     * war method
     */
-   public Card war()
+   public void war()
    {
-      Card card = flip();
-      return card;
+      warCards[0] = compCard;
+      warCards[1] = playerCard;
+      compCard = compPile.remove();
+      playerCard = playerPile.remove();
+      warCards[2] = compCard;
+      warCards[3] = playerCard;
+      compCard = compPile.remove();
+      playerCard = playerPile.remove();
+   }
+   
+   public Card getComp()
+   {
+      return compCard;
+   }
+   
+   public Card getPlayer()
+   {
+      return playerCard;
+   }
+   
+   public void returnCards()
+   {
+      if (playerCard.getRank() > compCard.getRank())
+      {
+         playerPile.add(playerCard);
+         playerPile.add(compCard);
+         for (int i=0;warCards[i]!=null; i++)
+         {
+            playerPile.add(warCards[i]);
+            warCards[i] = null;
+         }
+      }
+      else
+      {
+         compPile.add(compCard);
+         compPile.add(playerCard);
+         for (int i=0;warCards[i]!=null; i++)
+         {
+            compPile.add(warCards[i]);
+            warCards[i] = null;
+         }
+      }
    }
    
    public String score()
