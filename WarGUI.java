@@ -19,10 +19,12 @@ public class WarGUI extends JFrame
    private JLabel score;
    /** title Shows the title of game*/
    private JLabel title;
-   /** playerCard The face of the players card*/
-   private Icon playerCard;
-   /** compCard The face of the computers card*/
-   private Icon compCard;
+   /** playerImage The face of the players card*/
+   private ImageIcon playerImage;
+   /** compImage The face of the computers card*/
+   private ImageIcon compImage;
+   private Card compCard;
+   private Card playerCard;
    private JLabel playerLabel;
    private JLabel compLabel;
    /** message Message for score*/
@@ -47,11 +49,15 @@ public class WarGUI extends JFrame
       
       cards = new JPanel(new GridLayout(1,2));
       cards.setBackground(new Color(162,0,37));
+      compLabel = new JLabel("~~~~Computer~~~~");
+      playerLabel = new JLabel("~~~~You~~~~");
       
       flip = new JButton("Flip");
       flip.addActionListener(new ButtonListener());
+      
       cards.add(compLabel);
       cards.add(playerLabel);
+      
       table.add(cards,BorderLayout.CENTER);
       table.add(flip,BorderLayout.SOUTH);
       
@@ -64,13 +70,15 @@ public class WarGUI extends JFrame
    {
       public void actionPerformed(ActionEvent e)
       {     
-         card = game.flip(); 
+         game.flip();
+         compCard = game.getComp();
+         playerCard = game.getPlayer();
             
-         compCard = card.getImage();
-         compLabel = new JLabel(compCard);
+         compImage = compCard.getImage();
+         compLabel = new JLabel(compImage);
          cards.add(compLabel);
-         playerCard = new ImageIcon("10c.jpg");
-         playerLabel = new JLabel(playerCard);
+         playerImage = playerCard.getImage();
+         playerLabel = new JLabel(playerImage);
          cards.add(playerLabel);
    
       }
