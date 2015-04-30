@@ -31,7 +31,9 @@ public class WarGUI extends JFrame
    String message;
    
    Card card;
-   
+   /**
+    * WarGUI Constructor
+    */
    public WarGUI()
    {
       game = new War();
@@ -65,8 +67,9 @@ public class WarGUI extends JFrame
       
    }  
    
-   // handle button events
-   private class ButtonListener implements ActionListener
+   /** ButtonListener
+   */
+   private class ButtonListener extends JButton implements ActionListener
    {
       public void actionPerformed(ActionEvent e)
       {     

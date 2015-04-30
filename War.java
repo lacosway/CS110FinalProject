@@ -33,12 +33,12 @@ public class War extends Deck
          compPile.add(dealCard());
          playerPile.add(dealCard());
       }
+      compCard = new Card(Card.QUEEN,Card.SPADES);
+      playerCard = new Card(Card.KING,Card.SPADES);
    }
    
    /**
     * flip method
-    * @param pile The pile of cards, either computer or user
-    * @return card The card at top of pile
     */
    public void flip()
    {
@@ -66,16 +66,27 @@ public class War extends Deck
       playerCard = playerPile.remove();
    }
    
+   /**
+    * getComp method
+    * @return compCard
+    */
    public Card getComp()
    {
       return compCard;
    }
    
+   /**
+    * getPlayer method
+    * @return playerCard
+    */
    public Card getPlayer()
    {
       return playerCard;
    }
    
+   /**
+    * returnCards method
+    */
    public void returnCards()
    {
       if (playerCard.getRank() > compCard.getRank())
@@ -100,6 +111,10 @@ public class War extends Deck
       }
    }
    
+   /**
+    * score method
+    * @return score The number of cards each player has
+    */
    public String score()
    {
       compCards = compPile.size();
