@@ -5,6 +5,7 @@
  */
 import java.util.LinkedList;
 import java.util.Queue;
+import javax.swing.*;
 
 public class War extends Deck
 {
@@ -35,6 +36,11 @@ public class War extends Deck
       }
       compCard = new Card(Card.QUEEN,Card.SPADES);
       playerCard = new Card(Card.KING,Card.SPADES);
+      
+      warCards[0] = null;
+      warCards[1] = null;
+      warCards[2] = null;
+      warCards[3] = null;
    }
    
    /**
@@ -93,20 +99,26 @@ public class War extends Deck
       {
          playerPile.add(playerCard);
          playerPile.add(compCard);
-         for (int i=0;warCards[i]!=null; i++)
+         for (int i=0;i<=3; i++)
          {
-            playerPile.add(warCards[i]);
-            warCards[i] = null;
+            if (warCards[i] !=null)
+            {
+               playerPile.add(warCards[i]);
+               warCards[i] = null;
+            }
          }
       }
       else
       {
          compPile.add(compCard);
          compPile.add(playerCard);
-         for (int i=0;warCards[i]!=null; i++)
+         for (int i=0;i<=3; i++)
          {
-            compPile.add(warCards[i]);
-            warCards[i] = null;
+            if (warCards[i] !=null)
+            {
+               compPile.add(warCards[i]);
+               warCards[i] = null;
+            }
          }
       }
    }
@@ -120,7 +132,24 @@ public class War extends Deck
       compCards = compPile.size();
       playerCards = playerPile.size();
       String score;
-      score = ("Computer: " + compCards + "\tYou: " + playerCards);
+      score = ("Computer: " + compCards + "\nYou: " + playerCards);
+      if (compPile.size()==0 || playerPile.size()==0)
+         score = "winner";
       return score;
+   }
+   
+   /**
+    * winner method
+    * @return winner The game over message
+    */
+   public ImageIcon winner()
+   {
+      ImageIcon winner;
+      if(compPile.size()==52)
+         winner = new ImageIcon("youlose.jpg");
+      else
+         winner = new ImageIcon("youwin.jpg");
+         
+      return winner;
    }
 }

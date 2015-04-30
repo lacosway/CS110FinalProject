@@ -1,6 +1,6 @@
 /**
  * CS 110 Final Project
- * Game of War Driver:
+ * Game of War Driver
  *
  * @author Lizzie Cosway
  */

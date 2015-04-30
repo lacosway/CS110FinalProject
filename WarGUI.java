@@ -31,6 +31,7 @@ public class WarGUI extends JFrame
    String message;
    
    Card card;
+   ImageIcon winner;
    /**
     * WarGUI Constructor
     */
@@ -54,7 +55,7 @@ public class WarGUI extends JFrame
       compLabel = new JLabel("~~~~Computer~~~~");
       playerLabel = new JLabel("~~~~You~~~~");
       
-      flip = new JButton("Flip");
+      flip = new JButton("FLIP");
       flip.addActionListener(new ButtonListener());
       
       cards.add(compLabel);
@@ -76,14 +77,29 @@ public class WarGUI extends JFrame
          game.flip();
          compCard = game.getComp();
          playerCard = game.getPlayer();
+         if (!playerCard.equals(compCard))
+         {
+            game.returnCards();
+            message = game.score();
+            score.setText(message);
+         }
             
          compImage = compCard.getImage();
-         compLabel = new JLabel(compImage);
-         cards.add(compLabel);
+         compLabel.setIcon(compImage);
          playerImage = playerCard.getImage();
-         playerLabel = new JLabel(playerImage);
-         cards.add(playerLabel);
-   
+         playerLabel.setIcon(playerImage);
+         
+         if (playerCard.equals(compCard))
+            flip.setText("~~WAR~~");
+         else
+            flip.setText("FLIP");
+            
+         if (message == "winner")
+         {
+            winner = game.winner();
+            playerLabel.setIcon(winner);
+            compLabel.setText("Good Game");
+         }
       }
    }
 }
