@@ -122,6 +122,7 @@ public class Card
    /**
     * equals method
     * @return status Will return true if the card equals the other card in rank
+    * @param card2 The card that is being compared to
     */  
    public boolean equals(Card card2)
    {
